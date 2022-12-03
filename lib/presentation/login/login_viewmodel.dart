@@ -4,6 +4,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:travel_planner/app/app.locator.dart';
 import 'package:travel_planner/app/app.logger.dart';
 import 'package:travel_planner/data/exceptions/network_exception.dart';
+import 'package:travel_planner/domain/entities/user/user.dart';
 
 import 'login_view.form.dart';
 
@@ -20,8 +21,8 @@ class LoginViewModel extends FormViewModel {
   Future login() async {
     setBusy(true);
     if ((!hasEmailValidationMessage) && (!hasPasswordValidationMessage)) {
-      // LoginUser user = LoginUser(email: emailValue!, password: passwordValue!);
       try {
+        User.auth(username: emailValue!, password: passwordValue!);
         // await _loginUseCase.execute(user: user);
         setBusy(false);
         if (!kIsWeb) {

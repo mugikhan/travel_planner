@@ -5,20 +5,36 @@ abstract class HttpService {
   /// - if successful: returns decoded json data
   ///
   /// - throws `NetworkException` if GET fails
-  Future<dynamic> getHttp(String url, {Map<String, dynamic>? queryParams});
+  Future<dynamic> getHttp(
+    String url, {
+    Map<String, dynamic>? queryParams,
+  });
 
   /// Send POST request with [body] to [url] and return the `response`
   /// - if successful: returns decoded json data
   ///
   /// - throws `NetworkException` if POST request fails
-  Future<dynamic> postHttp(String url, dynamic body,
-      {Map<String, dynamic>? queryParams});
+  Future<dynamic> postHttp(
+    String url,
+    dynamic body, {
+    Map<String, dynamic>? queryParams,
+  });
+
+  Future<dynamic> postUrlEncodedHttp(
+    String path,
+    dynamic body, {
+    Map<String, dynamic>? queryParams,
+    Map<String, dynamic>? headers,
+  });
 
   /// Send DELETE request to endpoint/[processEndpoint] and return the `response`
   /// - if successful: returns decoded json data
   ///
   /// - throws `NetworkException` if DELETE request fails
-  Future<dynamic> deleteHttp(String url, {Map<String, dynamic>? queryParams});
+  Future<dynamic> deleteHttp(
+    String url, {
+    Map<String, dynamic>? queryParams,
+  });
 
   /// Send POST request with [files] to endpoint/[processEndpoint] and return the `response`
   /// - if successful: returns decoded json data

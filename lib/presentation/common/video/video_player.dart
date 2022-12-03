@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:chewie/chewie.dart';
 import 'package:video_player/video_player.dart';
 
-import '../../../data/entities/video/video.dart';
+import '../../../domain/entities/video/video.dart';
 import '../../design/color_pallete.dart';
 import '../utility/string_utils.dart';
 import 'center_play_button.dart';

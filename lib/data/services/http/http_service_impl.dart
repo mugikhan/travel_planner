@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:dio/dio.dart';
@@ -18,8 +16,7 @@ class HttpServiceImpl implements HttpService {
 
   HttpServiceImpl() {
     dio = Dio()
-      ..options.baseUrl =
-          dotenv.env["API_URL"] ?? "https://api-dev.slingshotcrew.com"
+      ..options.baseUrl = dotenv.env["API_URL"] ?? "http://localhost:8888"
       ..options.connectTimeout = 60000
       ..options.sendTimeout = 60000
       ..options.receiveTimeout = 60000
@@ -31,7 +28,7 @@ class HttpServiceImpl implements HttpService {
             "GET, POST, OPTIONS, PUT, PATCH, DELETE",
         "Accept": "*/*"
       }
-      ..options.contentType = "application/json";
+      ..options.contentType = Headers.jsonContentType;
   }
 
   @override
@@ -68,6 +65,42 @@ class HttpServiceImpl implements HttpService {
         data: json.encode(body),
         // onSendProgress: network_utils.showLoadingProgress,
         // onReceiveProgress: network_utils.showLoadingProgress,
+      );
+    } on DioError catch (e) {
+      _log.e('HttpService: Failed to POST ${e.toString()}');
+      String message = handleError(e);
+      throw NetworkException(message);
+    }
+
+    return response.data;
+  }
+
+  @override
+  Future<dynamic> postUrlEncodedHttp(
+    String path,
+    dynamic body, {
+    Map<String, dynamic>? queryParams,
+    Map<String, dynamic>? headers,
+  }) async {
+    Response response;
+
+    _log.i('Sending $body to $path');
+
+    try {
+      var newDio = Dio(
+        BaseOptions(
+          baseUrl: dotenv.env["API_URL"] ?? "http://localhost:8888",
+          contentType: Headers.formUrlEncodedContentType,
+          method: "POST",
+          connectTimeout: 60000,
+          sendTimeout: 60000,
+          receiveTimeout: 60000,
+          headers: headers,
+        ),
+      );
+      response = await newDio.post(
+        path,
+        data: body,
       );
     } on DioError catch (e) {
       _log.e('HttpService: Failed to POST ${e.toString()}');

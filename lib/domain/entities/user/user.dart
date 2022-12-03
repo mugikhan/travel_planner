@@ -11,17 +11,21 @@ class User with _$User {
 
   @HiveType(typeId: 0, adapterName: "UserAdapter")
   const factory User({
-    String? uuid,
     @HiveField(0) @JsonKey(name: "emailAddress") required String email,
     @HiveField(1) required String givenName,
     @HiveField(2) required String familyName,
     @HiveField(3) required String? profilePicture,
-    num? updatedAt,
   }) = _User;
+
+  const factory User.auth({
+    required String username,
+    required String password,
+    @JsonKey(name: "grant_type") @Default('password') String grantType,
+  }) = _AuthUser;
 
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
 
-  String getFullName() {
-    return "$givenName $familyName";
-  }
+  // String getFullName() {
+  //   return "$givenName $familyName";
+  // }
 }

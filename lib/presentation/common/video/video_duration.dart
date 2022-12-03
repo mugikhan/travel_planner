@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:travel_planner/data/entities/video/video.dart';
+import 'package:travel_planner/domain/entities/video/video.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../design/color_pallete.dart';
