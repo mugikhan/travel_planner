@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HotelScaffold extends StatelessWidget {
-  const HotelScaffold({
+class TravelScaffold extends StatelessWidget {
+  const TravelScaffold({
     Key? key,
     required this.title,
     required this.body,
@@ -28,8 +28,8 @@ class HotelScaffold extends StatelessWidget {
   }
 }
 
-class HotelScaffoldWeb extends StatelessWidget {
-  const HotelScaffoldWeb({
+class TravelScaffoldWeb extends StatelessWidget {
+  const TravelScaffoldWeb({
     Key? key,
     required this.title,
     required this.body,

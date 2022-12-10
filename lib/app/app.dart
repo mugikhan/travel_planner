@@ -9,7 +9,7 @@ import 'package:travel_planner/domain/repositories/user_repository.dart';
 import 'package:travel_planner/domain/usecases/login_user_usecase.dart';
 import 'package:travel_planner/presentation/common/bottom_nav/bottom_nav_view.dart';
 import 'package:travel_planner/presentation/home/home_view.dart';
-import 'package:travel_planner/presentation/login/login_view.dart';
+import 'package:travel_planner/presentation/signin/sign_in_view.dart';
 import 'package:travel_planner/presentation/splash/splash_view.dart';
 import 'package:travel_planner/presentation/webview/webview.dart';
 
@@ -26,7 +26,7 @@ import '../data/services/notification/notification_service_impl.dart';
       initial: true,
     ),
     AdaptiveRoute(
-      page: LoginView,
+      page: SignInView,
     ),
     AdaptiveRoute(
       page: Webview,

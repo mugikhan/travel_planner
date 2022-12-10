@@ -45,7 +45,7 @@ class SplashView extends StatelessWidget {
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                    image: ExactAssetImage('assets/aerial_2.jpg'),
+                    image: ExactAssetImage('assets/airplane-wing.jpg'),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -72,14 +72,14 @@ class SplashView extends StatelessWidget {
                     child: Opacity(
                       opacity: value.get(AniProps.opacity),
                       child: const Image(
-                        image: AssetImage('assets/logo_transparent.png'),
+                        image: AssetImage('assets/logo-black.png'),
                         fit: BoxFit.contain,
                       ),
                     ),
                   );
                 },
                 onCompleted: () async {
-                  await viewModel.navigateToLoginView();
+                  await viewModel.navigateToSignInView();
                 },
               )
             ],

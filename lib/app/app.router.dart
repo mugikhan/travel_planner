@@ -12,14 +12,14 @@ import 'package:stacked_services/stacked_services.dart' as _i8;
 import 'package:travel_planner/presentation/common/bottom_nav/bottom_nav_view.dart'
     as _i5;
 import 'package:travel_planner/presentation/home/home_view.dart' as _i7;
-import 'package:travel_planner/presentation/login/login_view.dart' as _i3;
+import 'package:travel_planner/presentation/signin/sign_in_view.dart' as _i3;
 import 'package:travel_planner/presentation/splash/splash_view.dart' as _i2;
 import 'package:travel_planner/presentation/webview/webview.dart' as _i4;
 
 class Routes {
   static const splashView = '/';
 
-  static const loginView = '/login-view';
+  static const signInView = '/sign-in-view';
 
   static const webview = '/Webview';
 
@@ -27,7 +27,7 @@ class Routes {
 
   static const all = <String>{
     splashView,
-    loginView,
+    signInView,
     webview,
     bottomNav,
   };
@@ -40,8 +40,8 @@ class StackedRouter extends _i1.RouterBase {
       page: _i2.SplashView,
     ),
     _i1.RouteDef(
-      Routes.loginView,
-      page: _i3.LoginView,
+      Routes.signInView,
+      page: _i3.SignInView,
     ),
     _i1.RouteDef(
       Routes.webview,
@@ -60,12 +60,9 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
-    _i3.LoginView: (data) {
-      final args = data.getArgs<LoginViewArguments>(
-        orElse: () => const LoginViewArguments(),
-      );
+    _i3.SignInView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => _i3.LoginView(key: args.key),
+        builder: (context) => const _i3.SignInView(),
         settings: data,
       );
     },
@@ -91,12 +88,6 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-class LoginViewArguments {
-  const LoginViewArguments({this.key});
-
-  final _i6.Key? key;
-}
-
 class WebviewArguments {
   const WebviewArguments({
     this.key,
@@ -109,7 +100,7 @@ class WebviewArguments {
 }
 
 class BottomNavRoutes {
-  static const homeView = '/home-view';
+  static const homeView = '/';
 
   static const all = <String>{homeView};
 }
@@ -166,16 +157,14 @@ extension NavigatorStateExtension on _i8.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToLoginView({
-    _i6.Key? key,
+  Future<dynamic> navigateToSignInView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo<dynamic>(Routes.loginView,
-        arguments: LoginViewArguments(key: key),
+  ]) async {
+    return navigateTo<dynamic>(Routes.signInView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

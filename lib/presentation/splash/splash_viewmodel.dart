@@ -9,10 +9,10 @@ class SplashViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
 
   Future<void> navigateToHomeView() async {
-    await _navigationService.navigateTo(BottomNavRoutes.homeView);
+    await _navigationService.navigateTo(BottomNavRoutes.homeView, id: 1);
   }
 
-  Future<void> navigateToLoginView() async {
-    await _navigationService.navigateTo(Routes.loginView);
+  Future<void> navigateToSignInView() async {
+    await _navigationService.navigateTo(Routes.signInView);
   }
 }
