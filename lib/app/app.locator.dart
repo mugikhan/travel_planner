@@ -13,11 +13,17 @@ import 'package:stacked_services/src/navigation/navigation_service.dart';
 import 'package:stacked_services/src/snackbar/snackbar_service.dart';
 import 'package:stacked_themes/src/theme_service.dart';
 
+import '../data/data_sources/user/user_remote_data_source.dart';
+import '../data/repositories/user_repository_impl.dart';
 import '../data/services/connectivity/connectivity_service.dart';
 import '../data/services/http/http_service.dart';
 import '../data/services/http/http_service_impl.dart';
+import '../data/services/localstore/encryptedcache/encrypted_cache.dart';
+import '../data/services/localstore/hive_service.dart';
 import '../data/services/notification/notification_service.dart';
 import '../data/services/notification/notification_service_impl.dart';
+import '../domain/repositories/user_repository.dart';
+import '../domain/usecases/login_user_usecase.dart';
 
 final locator = StackedLocator.instance;
 
@@ -36,6 +42,16 @@ Future<void> setupLocator(
       () => NotificationServiceImpl());
   locator.registerLazySingleton<HttpService>(() => HttpServiceImpl());
   locator.registerLazySingleton(() => ThemeService.getInstance());
+  locator.registerLazySingleton<UserRemoteDataSource>(
+      () => UserRemoteDataSourceImpl());
+  locator.registerLazySingleton<UserRepository>(() => UserRepositoryImpl());
+  locator.registerLazySingleton<LoginUserUseCase>(() => LoginUserUseCaseImpl());
   final connectivityService = await ConnectivityService.getInstance();
   locator.registerSingleton(connectivityService);
+
+  final hiveService = await HiveService.getInstance();
+  locator.registerSingleton(hiveService);
+
+  final encryptedCache = await EncryptedCache.getInstance();
+  locator.registerSingleton(encryptedCache);
 }

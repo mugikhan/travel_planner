@@ -20,12 +20,16 @@ Token _$TokenFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Token {
+  @HiveField(0)
   @JsonKey(name: "access_token")
   String get accessToken => throw _privateConstructorUsedError;
+  @HiveField(1)
   @JsonKey(name: "token_type")
   String get tokenType => throw _privateConstructorUsedError;
+  @HiveField(2)
   @JsonKey(name: "expires_in")
   int get expiresIn => throw _privateConstructorUsedError;
+  @HiveField(3)
   @JsonKey(name: "refresh_token")
   String get refreshToken => throw _privateConstructorUsedError;
 
@@ -40,10 +44,10 @@ abstract class $TokenCopyWith<$Res> {
       _$TokenCopyWithImpl<$Res, Token>;
   @useResult
   $Res call(
-      {@JsonKey(name: "access_token") String accessToken,
-      @JsonKey(name: "token_type") String tokenType,
-      @JsonKey(name: "expires_in") int expiresIn,
-      @JsonKey(name: "refresh_token") String refreshToken});
+      {@HiveField(0) @JsonKey(name: "access_token") String accessToken,
+      @HiveField(1) @JsonKey(name: "token_type") String tokenType,
+      @HiveField(2) @JsonKey(name: "expires_in") int expiresIn,
+      @HiveField(3) @JsonKey(name: "refresh_token") String refreshToken});
 }
 
 /// @nodoc
@@ -92,10 +96,10 @@ abstract class _$$_TokenCopyWith<$Res> implements $TokenCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "access_token") String accessToken,
-      @JsonKey(name: "token_type") String tokenType,
-      @JsonKey(name: "expires_in") int expiresIn,
-      @JsonKey(name: "refresh_token") String refreshToken});
+      {@HiveField(0) @JsonKey(name: "access_token") String accessToken,
+      @HiveField(1) @JsonKey(name: "token_type") String tokenType,
+      @HiveField(2) @JsonKey(name: "expires_in") int expiresIn,
+      @HiveField(3) @JsonKey(name: "refresh_token") String refreshToken});
 }
 
 /// @nodoc
@@ -135,26 +139,39 @@ class __$$_TokenCopyWithImpl<$Res> extends _$TokenCopyWithImpl<$Res, _$_Token>
 
 /// @nodoc
 @JsonSerializable()
+@HiveType(typeId: 1, adapterName: "TokenAdapter")
 class _$_Token implements _Token {
   const _$_Token(
-      {@JsonKey(name: "access_token") required this.accessToken,
-      @JsonKey(name: "token_type") required this.tokenType,
-      @JsonKey(name: "expires_in") required this.expiresIn,
-      @JsonKey(name: "refresh_token") required this.refreshToken});
+      {@HiveField(0)
+      @JsonKey(name: "access_token")
+          required this.accessToken,
+      @HiveField(1)
+      @JsonKey(name: "token_type")
+          required this.tokenType,
+      @HiveField(2)
+      @JsonKey(name: "expires_in")
+          required this.expiresIn,
+      @HiveField(3)
+      @JsonKey(name: "refresh_token")
+          required this.refreshToken});
 
   factory _$_Token.fromJson(Map<String, dynamic> json) =>
       _$$_TokenFromJson(json);
 
   @override
+  @HiveField(0)
   @JsonKey(name: "access_token")
   final String accessToken;
   @override
+  @HiveField(1)
   @JsonKey(name: "token_type")
   final String tokenType;
   @override
+  @HiveField(2)
   @JsonKey(name: "expires_in")
   final int expiresIn;
   @override
+  @HiveField(3)
   @JsonKey(name: "refresh_token")
   final String refreshToken;
 
@@ -199,24 +216,35 @@ class _$_Token implements _Token {
 
 abstract class _Token implements Token {
   const factory _Token(
-          {@JsonKey(name: "access_token") required final String accessToken,
-          @JsonKey(name: "token_type") required final String tokenType,
-          @JsonKey(name: "expires_in") required final int expiresIn,
-          @JsonKey(name: "refresh_token") required final String refreshToken}) =
-      _$_Token;
+      {@HiveField(0)
+      @JsonKey(name: "access_token")
+          required final String accessToken,
+      @HiveField(1)
+      @JsonKey(name: "token_type")
+          required final String tokenType,
+      @HiveField(2)
+      @JsonKey(name: "expires_in")
+          required final int expiresIn,
+      @HiveField(3)
+      @JsonKey(name: "refresh_token")
+          required final String refreshToken}) = _$_Token;
 
   factory _Token.fromJson(Map<String, dynamic> json) = _$_Token.fromJson;
 
   @override
+  @HiveField(0)
   @JsonKey(name: "access_token")
   String get accessToken;
   @override
+  @HiveField(1)
   @JsonKey(name: "token_type")
   String get tokenType;
   @override
+  @HiveField(2)
   @JsonKey(name: "expires_in")
   int get expiresIn;
   @override
+  @HiveField(3)
   @JsonKey(name: "refresh_token")
   String get refreshToken;
   @override

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:travel_planner/app/app.locator.dart';
 import 'package:travel_planner/app/app.logger.dart';
 import 'package:travel_planner/data/data_sources/user/user_remote_data_source.dart';
-import 'package:travel_planner/data/services/http/http_service.dart';
+import 'package:travel_planner/data/services/localstore/encryptedcache/encrypted_cache.dart';
 import 'package:travel_planner/domain/entities/token/token.dart';
 import 'package:travel_planner/domain/entities/user/user.dart';
 import 'package:travel_planner/domain/repositories/user_repository.dart';
@@ -11,8 +11,7 @@ import 'package:travel_planner/domain/repositories/user_repository.dart';
 import '../exceptions/network_exception.dart';
 
 class UserRepositoryImpl implements UserRepository {
-  final _httpService = locator<HttpService>();
-  // final _encryptedCache = locator<EncryptedCache>();
+  final _encryptedCache = locator<EncryptedCache>();
   final _userRemoteDataSource = locator<UserRemoteDataSource>();
   final log = getLogger('User Repo');
 
@@ -28,15 +27,20 @@ class UserRepositoryImpl implements UserRepository {
           await _userRemoteDataSource.loginUser(user, clientCredentials);
       Token token = Token.fromJson(response);
 
-      // await _encryptedCache.cacheToken(token.token);
+      await _encryptedCache.cacheToken(token);
     } on NetworkException catch (_) {
       rethrow;
     }
   }
 
   @override
-  Future<bool> isTokenExpired() {
-    // TODO: implement isTokenExpired
+  Future<bool> isTokenExpired() async {
+    // Token? token = await _encryptedCache.getToken();;
+    // if (token != null) {
+    //   final date = DateTime(token.expiresIn);
+    //   if (date.isAfter(DateTime.now())) return false;
+    // }
+    // return true;
     throw UnimplementedError();
   }
 }
