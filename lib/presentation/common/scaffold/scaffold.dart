@@ -7,12 +7,14 @@ class TravelScaffold extends StatelessWidget {
     required this.body,
     this.leading,
     this.footerButtons,
+    this.trailing,
   }) : super(key: key);
 
   final String title;
   final Widget body;
   final Widget? leading;
   final List<Widget>? footerButtons;
+  final List<Widget>? trailing;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,7 @@ class TravelScaffold extends StatelessWidget {
         title: Text(title),
         leading: leading ?? Container(),
         titleTextStyle: Theme.of(context).appBarTheme.titleTextStyle,
+        actions: trailing,
       ),
       body: body,
       persistentFooterButtons: footerButtons,

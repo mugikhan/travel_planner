@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:stacked_services/stacked_services.dart';
+import 'package:travel_planner/app/app.locator.dart';
 import 'package:travel_planner/presentation/common/scaffold/scaffold.dart';
 
 class Webview extends StatefulWidget {
@@ -15,12 +17,13 @@ class Webview extends StatefulWidget {
 }
 
 class _WebviewState extends State<Webview> {
+  final _navigationService = locator<NavigationService>();
+
   InAppWebViewController? webViewController;
   InAppWebViewGroupOptions groupOptions = InAppWebViewGroupOptions(
     crossPlatform: InAppWebViewOptions(
       useShouldOverrideUrlLoading: true,
       mediaPlaybackRequiresUserGesture: false,
-      minimumFontSize: 12,
     ),
   );
 
@@ -30,6 +33,14 @@ class _WebviewState extends State<Webview> {
   Widget build(BuildContext context) {
     return TravelScaffold(
       title: "",
+      trailing: [
+        IconButton(
+          onPressed: () {
+            _navigationService.back();
+          },
+          icon: const Icon(Icons.clear),
+        ),
+      ],
       body: Stack(
         children: [
           InAppWebView(
@@ -46,19 +57,9 @@ class _WebviewState extends State<Webview> {
               if (uri.queryParameters.containsKey("code")) {
                 String code = uri.queryParameters["code"]!;
                 print("CODE $code");
+              } else if (uri.queryParameters.containsKey("success")) {
+                _navigationService.back();
               }
-              // if (!["http", "https", "file", "chrome", "data", "javascript", "about"]
-              //     .contains(uri.scheme)) {
-              //   if (await canLaunchUrl(uri)) {
-              //     // Launch the App
-              //     await launchUrl(
-              //       uri,
-              //     );
-              //     // and cancel the request
-              //     return NavigationActionPolicy.CANCEL;
-              //   }
-              // }
-
               return NavigationActionPolicy.ALLOW;
             },
             onProgressChanged: (controller, progress) {
@@ -67,7 +68,7 @@ class _WebviewState extends State<Webview> {
               });
             },
             onConsoleMessage: (controller, consoleMessage) {
-              print(consoleMessage);
+              print(consoleMessage.message);
             },
           ),
           progress < 1.0
