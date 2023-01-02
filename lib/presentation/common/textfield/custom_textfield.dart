@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../design/color_pallete.dart';
 
-class HotelTextfield extends StatelessWidget {
-  const HotelTextfield(
+class TravelTextfield extends StatelessWidget {
+  const TravelTextfield(
       {Key? key,
       required this.textEditingController,
       required this.focusNode,

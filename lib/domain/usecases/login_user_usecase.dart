@@ -10,8 +10,11 @@ class LoginUserUseCaseImpl implements LoginUserUseCase {
   final _userRepository = locator<UserRepository>();
 
   @override
-  Future<void> execute(User user) {
-    // TODO: implement execute
-    throw UnimplementedError();
+  Future<void> execute(User user) async {
+    try {
+      await _userRepository.login(user);
+    } catch (e) {
+      rethrow;
+    }
   }
 }

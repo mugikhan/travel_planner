@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
@@ -17,6 +18,7 @@ Future main() async {
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await setupLocator();
   await ThemeManager.initialise();
+  await dotenv.load(fileName: ".env");
   setupSnackbarUi();
   setupDialogUi();
   setupBottomSheetUi();

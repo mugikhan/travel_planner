@@ -61,8 +61,11 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i3.SignInView: (data) {
+      final args = data.getArgs<SignInViewArguments>(
+        orElse: () => const SignInViewArguments(),
+      );
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i3.SignInView(),
+        builder: (context) => _i3.SignInView(key: args.key),
         settings: data,
       );
     },
@@ -89,18 +92,24 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
+class SignInViewArguments {
+  const SignInViewArguments({this.key});
+
+  final _i6.Key? key;
+}
+
 class WebViewArguments {
   const WebViewArguments({
     this.key,
     required this.url,
-    required this.authState,
+    this.authState,
   });
 
   final _i6.Key? key;
 
   final String url;
 
-  final String authState;
+  final String? authState;
 }
 
 class BottomNavRoutes {
@@ -161,14 +170,16 @@ extension NavigatorStateExtension on _i8.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToSignInView([
+  Future<dynamic> navigateToSignInView({
+    _i6.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.signInView,
+        arguments: SignInViewArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -178,7 +189,7 @@ extension NavigatorStateExtension on _i8.NavigationService {
   Future<dynamic> navigateToWebView({
     _i6.Key? key,
     required String url,
-    required String authState,
+    String? authState,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:dio/dio.dart';
-import 'package:travel_planner/app/app.locator.dart';
 import 'package:travel_planner/app/app.logger.dart';
 import 'package:travel_planner/data/exceptions/network_exception.dart';
 
@@ -91,7 +90,6 @@ class HttpServiceImpl implements HttpService {
         BaseOptions(
           baseUrl: dotenv.env["API_URL"] ?? "http://localhost:8888",
           contentType: Headers.formUrlEncodedContentType,
-          method: "POST",
           connectTimeout: 60000,
           sendTimeout: 60000,
           receiveTimeout: 60000,
@@ -194,8 +192,12 @@ class HttpServiceImpl implements HttpService {
         errorDescription = "Receive timeout in connection with API server";
         break;
       case DioErrorType.response:
-        errorDescription =
-            "Received invalid status code: ${dioError.response?.statusCode ?? 'N/A'}";
+        if (dioError.response?.data != null) {
+          errorDescription = dioError.response!.data['error'];
+        } else {
+          errorDescription =
+              "Received invalid status code: ${dioError.response?.statusCode ?? 'N/A'}";
+        }
         break;
       case DioErrorType.sendTimeout:
         errorDescription = "Send timeout in connection with API server";
