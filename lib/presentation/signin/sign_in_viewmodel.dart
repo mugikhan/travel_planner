@@ -58,11 +58,6 @@ class SignInViewModel extends BaseViewModel {
         'code': code,
       },
     );
-    // final response = await _httpService.postHttp('localhost:8888/auth/token', {
-    //   'client_id': clientId,
-    //   'grant_type': 'authorization_code',
-    //   'code': code,
-    // });
 
     // Get the access token from the response
     final accessToken = jsonDecode(response.data)['access_token'] as String;
