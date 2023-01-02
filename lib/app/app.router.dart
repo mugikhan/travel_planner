@@ -21,14 +21,14 @@ class Routes {
 
   static const signInView = '/sign-in-view';
 
-  static const webview = '/Webview';
+  static const webView = '/web-view';
 
   static const bottomNav = '/bottom-nav';
 
   static const all = <String>{
     splashView,
     signInView,
-    webview,
+    webView,
     bottomNav,
   };
 }
@@ -44,8 +44,8 @@ class StackedRouter extends _i1.RouterBase {
       page: _i3.SignInView,
     ),
     _i1.RouteDef(
-      Routes.webview,
-      page: _i4.Webview,
+      Routes.webView,
+      page: _i4.WebView,
     ),
     _i1.RouteDef(
       Routes.bottomNav,
@@ -66,10 +66,11 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
-    _i4.Webview: (data) {
-      final args = data.getArgs<WebviewArguments>(nullOk: false);
+    _i4.WebView: (data) {
+      final args = data.getArgs<WebViewArguments>(nullOk: false);
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => _i4.Webview(key: args.key, url: args.url),
+        builder: (context) => _i4.WebView(
+            key: args.key, url: args.url, authState: args.authState),
         settings: data,
         fullscreenDialog: true,
       );
@@ -88,15 +89,18 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-class WebviewArguments {
-  const WebviewArguments({
+class WebViewArguments {
+  const WebViewArguments({
     this.key,
     required this.url,
+    required this.authState,
   });
 
   final _i6.Key? key;
 
   final String url;
+
+  final String authState;
 }
 
 class BottomNavRoutes {
@@ -171,17 +175,18 @@ extension NavigatorStateExtension on _i8.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToWebview({
+  Future<dynamic> navigateToWebView({
     _i6.Key? key,
     required String url,
+    required String authState,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   }) async {
-    return navigateTo<dynamic>(Routes.webview,
-        arguments: WebviewArguments(key: key, url: url),
+    return navigateTo<dynamic>(Routes.webView,
+        arguments: WebViewArguments(key: key, url: url, authState: authState),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

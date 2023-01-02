@@ -29,7 +29,7 @@ import '../data/services/notification/notification_service_impl.dart';
       page: SignInView,
     ),
     AdaptiveRoute(
-      page: Webview,
+      page: WebView,
       fullscreenDialog: true,
     ),
     AdaptiveRoute(

@@ -4,19 +4,21 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:travel_planner/app/app.locator.dart';
 import 'package:travel_planner/presentation/common/scaffold/scaffold.dart';
 
-class Webview extends StatefulWidget {
-  const Webview({
+class WebView extends StatefulWidget {
+  const WebView({
     super.key,
     required this.url,
+    required this.authState,
   });
 
   final String url;
+  final String authState;
 
   @override
-  State<Webview> createState() => _WebviewState();
+  State<WebView> createState() => _WebViewState();
 }
 
-class _WebviewState extends State<Webview> {
+class _WebViewState extends State<WebView> {
   final _navigationService = locator<NavigationService>();
 
   InAppWebViewController? webViewController;
@@ -56,7 +58,12 @@ class _WebviewState extends State<Webview> {
 
               if (uri.queryParameters.containsKey("code")) {
                 String code = uri.queryParameters["code"]!;
+                String state = uri.queryParameters["state"]!;
+                if (state == widget.authState) {
+                  print("STATE MATCH");
+                }
                 print("CODE $code");
+                _navigationService.back();
               } else if (uri.queryParameters.containsKey("success")) {
                 _navigationService.back();
               }

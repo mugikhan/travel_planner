@@ -13,7 +13,7 @@ class SignInView extends StatelessWidget {
         body: Center(
           child: PrimaryTextButton(
             onPressed: () async {
-              await viewModel.onSignPressed();
+              await viewModel.onSignInPressed();
             },
             title: "Sign in",
           ),
